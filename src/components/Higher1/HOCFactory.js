@@ -25,7 +25,6 @@ export function HOCFactoryFactory(...params) {
     }
 }
 
-
 export class ListName extends React.PureComponent {
     constructor(props) {
         super(props)
@@ -52,7 +51,7 @@ export class ListName extends React.PureComponent {
         let { itemname, getListFn, addAll, ListComponents } = this.props
         let { showChild } = this.state
         let nodeList = addAll(itemname.nodeList)
-        console.log('itemname',itemname)
+        // console.log('itemname',itemname)
         return <div>
                 <p className={classNames({ 'on': this.state.showChild })}
                     onClick={this.handleClick}
@@ -61,7 +60,7 @@ export class ListName extends React.PureComponent {
                 </p>
                 {
                     showChild &&
-                    <div>
+                    <ul>
                         {
                             nodeList.map((item, i) => {
                                 return <ListComponents addAll={addAll}
@@ -72,7 +71,7 @@ export class ListName extends React.PureComponent {
                                        />
                             })
                         }
-                    </div>
+                    </ul>
                 }
             </div>
         
