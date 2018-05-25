@@ -1,5 +1,6 @@
 import React from 'react'
 import './style'
+// import List1 from './List1'
 import { HOCFactoryFactory, ListName } from './HOCFactory'
 
 export default class Higher extends React.Component {
@@ -42,37 +43,54 @@ export default class Higher extends React.Component {
 }
 
 
-function creatComponent ( params, com, style ){
-    const { info, getListFn, addAll, parentId } = params
+const List1 = ({ info, getListFn, addAll, parentId }) => {
     const obj = {
         info,
         getListFn,
         addAll,
         parentId,
-        ListComponents: com
+        ListComponents: List2
     }
     const EnhancedComponent = HOCFactoryFactory(obj)(ListName)
     return (
-        <li className={style}>
+        <li className="province-li">
             {EnhancedComponent}
         </li>
-        )
+    )
 }
 
 
-const List1 = (params) => {
-    return creatComponent( params, List2, 'province-li' )
-    
+const List2 = ({ info, getListFn, addAll, parentId }) => {
+    const obj = {
+        info,
+        getListFn,
+        addAll,
+        parentId,
+        ListComponents: List3
+    }
+    const EnhancedComponent = HOCFactoryFactory(obj)(ListName)
+    return (
+        <li className="city-li">
+            {EnhancedComponent}
+        </li>
+    )
 }
 
-const List2 = (params) => {
-    return creatComponent( params, List3, 'city-li' )
-    
-}
 
-const List3 = (params) => {
-    return creatComponent( params, List4, 'county-li' )
-    
+const List3 = ({ info, getListFn, addAll, parentId }) => {
+    const obj = {
+        info,
+        getListFn,
+        addAll,
+        parentId,
+        ListComponents: List4
+    }
+    const EnhancedComponent = HOCFactoryFactory(obj)(ListName)
+    return (
+        <li className="county-li">
+            {EnhancedComponent}
+        </li>
+    )
 }
 
 
