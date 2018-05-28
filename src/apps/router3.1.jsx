@@ -7,9 +7,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route, IndexRoute, hashHistory, Link, Redirect } from 'react-router'
 
-//页面
-import DemoRoute from '@/routes/Demo'
-
 class App extends React.Component {
   render() {
     return (<div>
@@ -51,60 +48,60 @@ class Dashboard extends React.Component {
 }
 
 // 路由表
-// const routes = (
-//   <Router history={hashHistory}>
-//     <Route component={App}
-//       path="/"
-//     >
-//       <Route component={About}
-//         path="about"
-//       />
-//       <Route component={Inbox}
-//         path="inbox"
-//       >
-//         <Route component={Message}
-//           path="/messages/:id"
-//         />
-//         <Route component={Message}
-//           path="messages/:id"
-//         />
-//         {/* 跳转 /inbox/messages/:id 到 /messages/:id */}
-//         <Redirect from="messages/:id"
-//           to="/messages/:id"
-//         />
-//       </Route>
-//     </Route>
-//   </Router>
-// )
-// ReactDOM.render(routes, document.getElementById('root'))
+const routes = (
+  <Router history={hashHistory}>
+    <Route component={App}
+      path="/"
+    >
+      <Route component={About}
+        path="about"
+      />
+      <Route component={Inbox}
+        path="inbox"
+      >
+        <Route component={Message}
+          path="/messages/:id"
+        />
+        <Route component={Message}
+          path="messages/:id"
+        />
+        {/* 跳转 /inbox/messages/:id 到 /messages/:id */}
+        <Redirect from="messages/:id"
+          to="/messages/:id"
+        />
+      </Route>
+    </Route>
+  </Router>
+)
+ReactDOM.render(routes, document.getElementById('root'))
 
-const routeConfig = [
-  {
-    path: '/',
-    component: App,
-    indexRoute: { component: Dashboard },
-    childRoutes: [
-      { path: 'about', component: About },
-      {
-        path: 'inbox',
-        component: Inbox,
-        childRoutes: [
-          { path: '/messages/:id', component: Message },
-          {
-            path: 'messages/:id',
-            onEnter: function (nextState, replaceState) {
-              replaceState(null, '/messages/' + nextState.params.id)
-            }
-          }
-        ]
-      }
-    ]
-  }
-]
+// const routeConfig = [
+//   {
+//     path: '/',
+//     component: App,
+//     indexRoute: { component: Dashboard },
+//     childRoutes: [
+//       { path: 'about', component: About },
+//       {
+//         path: 'inbox',
+//         component: Inbox,
+//         childRoutes: [
+//           { path: '/messages/:id', component: Message },
+//           {
+//             path: 'messages/:id',
+//             onEnter: function (nextState, replaceState) {
+//               replaceState(null, '/messages/' + nextState.params.id)
+//             }
+//           }
+//         ]
+//       }
+//     ]
+//   }
+// ]
 
-ReactDOM.render(<Router history={hashHistory}
-  routes={routeConfig}
-                />, document.getElementById('root'))
+// ReactDOM.render(<Router history={hashHistory}
+//   routes={routeConfig}
+//                 />, document.getElementById('root'))
 
 
 
