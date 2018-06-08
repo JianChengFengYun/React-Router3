@@ -1,28 +1,29 @@
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 
-export function HOCFactory(WrappedComponent) {
+export default function HOCFactory(WrappedComponent) {
 
     class TheHOC extends PureComponent {
         constructor(props) {
             super(props)
-            this.state = {
-                showChild: false,
-            }
         }
 
-        handleClick() {
-            let { showChild } = this.state
-            this.setState({
-                showChild: !showChild,
-            })
+        componentDidMount() {
+            // 其它相同的操作
         }
 
         render() {
-            return <WrappedComponent {...this.props }
-            />
+            return (<div className="wrap" >
+                <h1> 加载中... </h1>
+                <p> componentWillMount: 在渲染前调用, 在客户端也在服务端。 </p>
+                {
+                    WrappedComponent && 
+                    <WrappedComponent {...this.props} />
+                }
+                
+            </div >
+            )
         }
-
     }
 
     return TheHOC

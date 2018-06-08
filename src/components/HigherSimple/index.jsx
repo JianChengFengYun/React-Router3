@@ -30,21 +30,36 @@ export default class Main extends React.Component {
         })
     }
 
+    hideToast() {
+        this.setState({
+            toastImg: false,
+            toastText: false
+        })
+    }
+
     render() {
-        let {toastText, toastImg} = this.state
+        let { toastText, toastImg } = this.state
         return (
-            <div className="">
-                <h3 />
+            <div className="main">
                 <p onClick={this.showText.bind(this)}>文字提示</p>
 
                 <p onClick={this.showImg.bind(this)}>带图弹窗</p>
                 {
                     toastText &&
-                    < Text />
+                    <div className="bg"
+                        onClick={this.hideToast.bind(this)}
+                    >
+                        < Text />
+                    </div>
                 }
                 {
                     toastImg &&
-                    < Img />
+                    <div className="bg"
+                        onClick={this.hideToast.bind(this)}
+                    >
+                        < Img />
+                    </div>
+
                 }
             </div>
         )

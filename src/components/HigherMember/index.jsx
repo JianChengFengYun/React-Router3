@@ -1,6 +1,6 @@
 import React from 'react'
 import './style'
-import { HOCFactoryFactory } from './HOCFactory'
+import { HOCFactoryFactory, ListName } from './HOCFactory'
 
 export default class Higher extends React.Component {
     constructor(props) {
@@ -42,6 +42,40 @@ export default class Higher extends React.Component {
 }
 
 
+function creatComponent ( params, com, style ){
+    const { info, getListFn, addAll, parentId } = params
+    const obj = {
+        info,
+        getListFn,
+        addAll,
+        parentId,
+        ListComponents: com
+    }
+    const EnhancedComponent = HOCFactoryFactory(obj)(ListName)
+    return (
+        <li className={style}>
+            {EnhancedComponent}
+        </li>
+        )
+}
+
+
+const List1 = (params) => {
+    return creatComponent( params, List2, 'province-li' )
+    
+}
+
+const List2 = (params) => {
+    return creatComponent( params, List3, 'city-li' )
+    
+}
+
+const List3 = (params) => {
+    return creatComponent( params, List4, 'county-li' )
+    
+}
+
+
 function handleClick(info, getListFn, parentId) {
     if (info.localName === '全部') {
         getListFn(parentId)
@@ -49,6 +83,7 @@ function handleClick(info, getListFn, parentId) {
         getListFn(info.localId)
     }
 }
+
 const List4 = ({ info, getListFn, parentId }) => {
     return (
         <li className="town-li">
@@ -56,17 +91,3 @@ const List4 = ({ info, getListFn, parentId }) => {
         </li>
     )
 }
-
-
-const List3 = HOCFactoryFactory(List4)()
-
-
-const List2 = HOCFactoryFactory(List3)()
-
-
-// function province() {
-//     return (
-//         <p>省</p>
-//     )
-// }
-const List1 = HOCFactoryFactory(List2)()

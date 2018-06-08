@@ -9,6 +9,7 @@ import { Router, Route, IndexRoute, hashHistory, Link, Redirect } from 'react-ro
 import App from '@/components/Higher'
 import Simple from '@/components/HigherSimple'
 import HasParams from '@/components/HigherParam'
+import HigherMember from '@/components/HigherMember'
 
 ReactDOM.render((
     <Router history={hashHistory}>
@@ -19,6 +20,9 @@ ReactDOM.render((
             />
             <Route component={HasParams}
                 path="param"
+            />
+            <Route component={HigherMember}
+                path="member"
             />
         </Route>
     </Router >
